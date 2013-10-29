@@ -20,10 +20,11 @@
       "node":">= v0.4.0"
    },
    "main":"lib/main.js",
-   "dependencies":{
+   "dependencies":{},
+   "devDependencies":{
       "vows":"~0.7.0"
    },
-   "devDependencies":{
-
+   "scripts":{
+      "test": "vows test/*.js"
    }
 }
