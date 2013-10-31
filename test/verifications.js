@@ -16,9 +16,9 @@ vows.describe("Verifications API").addBatch({
         topic: function() {
             blockscore.verifications.create({
 			  verification: {
-			    type: "U.S. Citizen",
+			    type: "us_citizen",
 			    date_of_birth: '1993-01-13',
-			    ssn: "000-42-4242",
+			    ssn: "0000",
 			    address: {
 			      street1: "3515 Woodridge Lane",
 			      city: "Memphis",
@@ -39,7 +39,7 @@ vows.describe("Verifications API").addBatch({
             assert.isDefined(response.id);
             assert.isDefined(response.created_at);
             assert.isDefined(response.updated_at);
-            assert.equal(response.status, 'pending');
+            assert.equal(response.status, 'valid');
         },
     	'retrieve a verification' : {
 			topic: function(create_err, verification) {
