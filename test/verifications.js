@@ -50,6 +50,16 @@ vows.describe("Verifications API").addBatch({
         assert.isDefined(response);
         assert.isDefined(response.id);
       },
+    },
+    'create questions': {
+      topic: function(create_err, verification) {
+        blockscore.questions.create(verification.id, this.callback);
+      },
+      'Got questions': function(err, response) {
+        assert.ifError(err);
+        assert.ok(Array.isArray(response.questions));
+        assert.ok(Array.isArray(response.questions[0].answers));
+      }
     }
   },
   'Listing verifications': {
