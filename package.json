@@ -1,30 +1,30 @@
 {
-   "author":"John Backus <john@blockscore.com>",
-   "name":"blockscore",
-   "description":"Block Score API wrapper",
-   "keywords":[
-     "blockscore",
-     "block score",
-     "kyc",
-     "know your customer",
-     "bitcoin",
-     "verification"
-   ],
-   "version":"1.0.0",
-   "homepage":"https://github.com/blockscore/blockscore-node",
-   "repository":{
-      "type":"git",
-      "url":"git://github.com/blockscore/blockscore-node.git"
-   },
-   "engines":{
-      "node":">= v0.4.0"
-   },
-   "main":"lib/main.js",
-   "dependencies":{},
-   "devDependencies":{
-      "vows":"~0.7.0"
-   },
-   "scripts":{
-      "test": "vows test/*.js"
-   }
+  "author": "John Backus <john@blockscore.com>",
+  "name": "blockscore",
+  "description": "Block Score API wrapper",
+  "keywords": [
+    "blockscore",
+    "block score",
+    "kyc",
+    "know your customer",
+    "bitcoin",
+    "verification"
+  ],
+  "version": "1.0.0",
+  "homepage": "https://github.com/blockscore/blockscore-node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/blockscore/blockscore-node.git"
+  },
+  "engines": {
+    "node": ">= v0.4.0"
+  },
+  "main": "lib/main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "vows": "~0.7.0"
+  },
+  "scripts": {
+    "test": "vows test/*.js"
+  }
 }
