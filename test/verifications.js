@@ -15,21 +15,19 @@ vows.describe("Verifications API").addBatch({
   'Create verification': {
     topic: function() {
       blockscore.verifications.create({
-        verification: {
-          type: "us_citizen",
-          date_of_birth: '1993-01-13',
-          ssn: "0000",
-          address: {
-            street1: "3515 Woodridge Lane",
-            city: "Memphis",
-            state: "TN",
-            postal_code: "38115",
-            country: "United States"
-          },
-          name: {
-            first: "David",
-            last: "Brooks"
-          }
+        type: "us_citizen",
+        date_of_birth: '1993-01-13',
+        ssn: "0000",
+        address: {
+          street1: "3515 Woodridge Lane",
+          city: "Memphis",
+          state: "TN",
+          postal_code: "38115",
+          country: "United States"
+        },
+        name: {
+          first: "David",
+          last: "Brooks"
         }
       }, this.callback);
     },
