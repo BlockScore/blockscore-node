@@ -17,7 +17,9 @@ vows.describe("Verifications API").addBatch({
       blockscore.verifications.create({
         type: "us_citizen",
         date_of_birth: '1993-01-13',
-        ssn: "0000",
+        identification: {
+          ssn: "0000"
+        },
         address: {
           street1: "3515 Woodridge Lane",
           city: "Memphis",
