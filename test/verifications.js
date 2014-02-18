@@ -25,7 +25,7 @@ vows.describe("Verifications API").addBatch({
           city: "Memphis",
           state: "TN",
           postal_code: "38115",
-          country: "United States"
+          country_code: "US"
         },
         name: {
           first: "David",
