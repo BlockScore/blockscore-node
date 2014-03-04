@@ -19,7 +19,7 @@
   "engines": {
     "node": ">= v0.4.0"
   },
-  "main": "lib/main.js",
+  "main": "./lib/main.js",
   "dependencies": {},
   "devDependencies": {
     "vows": "~0.7.0"
