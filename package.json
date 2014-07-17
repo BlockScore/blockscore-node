@@ -1,13 +1,13 @@
 {
   "author": "John Backus <john@blockscore.com>",
   "name": "blockscore",
-  "description": "Block Score API wrapper",
+  "description": "BlockScore API wrapper",
   "keywords": [
     "blockscore",
     "block score",
+    "identity verification",
     "kyc",
     "know your customer",
-    "bitcoin",
     "verification"
   ],
   "version": "3.0.0",
