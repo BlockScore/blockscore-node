@@ -10,7 +10,7 @@
     "bitcoin",
     "verification"
   ],
-  "version": "1.0.2",
+  "version": "3.0.0",
   "homepage": "https://github.com/blockscore/blockscore-node",
   "repository": {
     "type": "git",
