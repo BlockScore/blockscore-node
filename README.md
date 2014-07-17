@@ -44,7 +44,6 @@ blockscore.verifications.retrieve(verification_id, callback);
 
 ```javascript
 blockscore.verifications.create({
-	type: "us_citizen",
 	date_of_birth: '1993-08-23',
 	identification: {
 	  ssn: "0000"
@@ -76,7 +75,7 @@ blockscore.questions.create(verification_id, callback);
 ```javascript
 var data = {
 	verification_id: response.verification_id,
-	question_set_id: response.question_set_id,
+	question_set_id: response.id,
 	answers: [
 	  {
 	    question_id: 1,
