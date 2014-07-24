@@ -54,12 +54,24 @@ vows.describe("Verifications API").addBatch({
       topic: function(create_err, verification) {
         blockscore.questions.create(verification.id, this.callback);
       },
-      'Got questions': function(err, response) {
+      'got newly created questions': function(err, response) {
         assert.ifError(err);
         assert.ok(response.verification_id);
         assert.ok(response.id);
         assert.ok(Array.isArray(response.questions));
         assert.ok(Array.isArray(response.questions[0].answers));
+      },
+      'retrieve questions': {
+        topic: function(err, create_response) {
+          var self = this;
+          blockscore.questions.retrieve(create_response.id, function(err, response) {
+            self.callback(err, response, create_response);
+          });
+        },
+        'check question set is same as when created': function(err, retrieve_response, create_response) {
+          assert.ifError(err);
+          assert.deepEqual(retrieve_response, create_response);
+        }
       },
       'score questions': {
         topic: function(err, response) {
