@@ -70,7 +70,7 @@ vows.describe("Watchlist Candidates API").addBatch({
         assert.instanceOf(result, Array);
       }
     },
-    'delete a watchlist candidate': {
+    'delete a watchlist candidate from scan list': {
       topic: function(create_err, watchlist_candidate) {
         blockscore.watchlist_candidates.del(watchlist_candidate.id, this.callback);
       },
@@ -78,11 +78,11 @@ vows.describe("Watchlist Candidates API").addBatch({
         assert.isTrue(response.deleted);
       }
     },
-    'history of a watchlist candidate': {
+    'revision history of a watchlist candidate': {
       topic: function(create_err, watchlist_candidate) {
         blockscore.watchlist_candidates.history(watchlist_candidate.id, this.callback);
       },
-      'Got history of a watchlist candidate': function(err, result) {
+      'Got a watchlist candidate\'s revision history': function(err, result) {
         assert.instanceOf(result, Array);
         assert.isNotZero(result.length);
         assert.isDefined(result[0].id);
