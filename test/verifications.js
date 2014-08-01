@@ -9,7 +9,7 @@ if (!api_key) {
   process.exit(2)
 }
 
-var blockscore = require('./../lib/main.js')(api_key);
+var blockscore = require('./../routes/blockscore-node.js')(api_key);
 
 vows.describe("Verifications API").addBatch({
   'Create verification': {
