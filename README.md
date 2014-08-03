@@ -102,6 +102,60 @@ var data = {
 blockscore.questions.score(data, callback);
 ```
 
+## Companies
+    
+### List all companies
+
+```javascript
+blockscore.companies.list({}, callback);
+```
+
+### List `5` companies
+
+```javascript
+blockscore.companies.list({
+  count: 5
+}, callback);
+```
+    
+### View a company by ID
+
+```javascript
+blockscore.companies.retrieve(company_id, callback);
+```
+
+### Create a new company
+
+```javascript
+blockscore.companies.create({
+    "entity_name": "BlockScore",
+    "tax_id": "123410000",
+    "incorp_date": "1980-08-25",
+    "incorp_state": "DE",
+    "incorp_country_code": "US",
+    "incorp_type": "corporation",
+    "dbas": "BitRemit",
+    "registration_number": "123123123",
+    "email": "test@example.com",
+    "url": "https://blockscore.com",
+    "phone_number": "6505555555",
+    "ip_address": "67.160.8.182",
+    "address": {
+      "street1": "123 Fake Streets",
+      "street2": null,
+      "city": "Stanford",
+      "state": "CA",
+      "postal_code": "94305",
+      "country_code": "US"
+    },
+    "details": {
+      "entity_name": "match",
+      "tax_id": "match",
+      "ofac": "no_match"
+    }
+}, callback);
+```
+
 ## Watchlist Candidates
     
 ### List all watchlist candidates
