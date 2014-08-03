@@ -173,6 +173,20 @@ blockscore.watchlist_candidates.del(watchlist_candidate.id, callback);
 blockscore.watchlist_candidates.history(watchlist_candidate.id, callback);
 ```
 
+## Watchlists
+
+### Search watchlists
+
+Creates a new verification, runs it through our verification process, and returns a list of all associated matches.
+
+```javascript
+blockscore.watchlists.search({
+	watchlist_candidate_id: id,  // required
+	match_type: type  // optional
+}, callback);
+```
+
+
 
 ## Contributing to BlockScore
  
