@@ -89,6 +89,34 @@ vows.describe("Watchlist Candidates API").addBatch({
       }
     }
   },
+  'Create watchlist_candidate w/ gibberish name & search watchlists for him': {
+      topic: function() {
+        blockscore.watchlist_candidates.create({name:'lasfjlskdjflasdfkjlaksdfj'}, this.callback);
+      },
+      'searching on person w/ gibberish name results in no matches': {
+        topic: function(create_err, watchlist_candidate) {
+          blockscore.watchlists.search({watchlist_candidate_id: watchlist_candidate.id}, this.callback);
+        },
+        'No matches result from searching person w/ no identifying info': function(err, result) {
+          assert.isArray(result.matches);
+          assert.isTrue(result.matches.length == 0);
+        }
+      }
+  },  
+  'Create watchlist_candidate & w/ name "Mohammed"  search watchlists for him': {
+      topic: function() {
+        blockscore.watchlist_candidates.create( {first_name: 'Mohammed'}, this.callback);
+      },
+      'searching on person w/ name "Mohammed" results in several matches': {
+        topic: function(create_err, watchlist_candidate) {
+          blockscore.watchlists.search({watchlist_candidate_id: watchlist_candidate.id}, this.callback);
+        },
+        'Some matches result from searching person w/ name "Mohammed"': function(err, result) {
+          assert.isArray(result.matches);
+          assert.isTrue(result.matches.length > 0);
+        }
+      }
+  },
   'Listing watchlist candidates': {
     topic: [],
 
