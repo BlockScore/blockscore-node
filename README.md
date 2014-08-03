@@ -102,6 +102,92 @@ var data = {
 blockscore.questions.score(data, callback);
 ```
 
+## Watchlist Candidates
+    
+### List all watchlist candidates
+
+```javascript
+blockscore.watchlist_candidates.list({}, callback);
+```
+
+### List `3` watchlist candidates
+
+```javascript
+blockscore.watchlist_candidates.list({
+  count: 3
+}, callback);
+```
+    
+### View a watchlist candidate by ID
+
+```javascript
+blockscore.watchlist_candidates.retrieve(watchlist_candidate_id, callback);
+```
+
+### Create a new watchlist candidate
+
+```javascript
+blockscore.watchlist_candidates.create({
+	date_of_birth: '1993-08-23',
+	identification: {
+	  ssn: "0000"
+	},
+	address: {
+	  street1: "1 Infinite Loop",
+	  city: "Cupertino",
+	  state: "CA",
+	  postal_code: "95014",
+	  country_code: "US"
+	},
+	name: {
+	  first: "Alain",
+	  last: "Meier"
+	}
+}, callback);
+```
+
+### Update a watchlist candidate
+
+Only the information you send us will be updated - the rest will remain the same.
+
+```javascript
+blockscore.watchlist_candidates.update(watchlist_candidate.id, {
+	address_state:'CA', 
+}, callback);
+```
+
+### View a watchlist candidate's past hits
+
+```javascript
+blockscore.watchlist_candidates.hits(watchlist_candidate.id, callback);
+```
+
+### Delete a watchlist candidate from scan list
+
+```javascript
+blockscore.watchlist_candidates.del(watchlist_candidate.id, callback);
+```
+
+### View a watchlist candidate's revision history	
+```javascript
+blockscore.watchlist_candidates.history(watchlist_candidate.id, callback);
+```
+
+## Watchlists
+
+### Search watchlists
+
+Creates a new verification, runs it through our verification process, and returns a list of all associated matches.
+
+```javascript
+blockscore.watchlists.search({
+	watchlist_candidate_id: id,  // required
+	match_type: type  // optional
+}, callback);
+```
+
+
+
 ## Contributing to BlockScore
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
