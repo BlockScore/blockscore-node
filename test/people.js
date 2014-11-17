@@ -11,28 +11,25 @@ if (!api_key) {
 
 var blockscore = require('./../lib/main.js')(api_key);
 
-vows.describe("Verifications API").addBatch({
-  'Create verification': {
+vows.describe("People API").addBatch({
+  'Create person': {
     topic: function() {
-      blockscore.verifications.create({
-        date_of_birth: '1993-01-13',
-        identification: {
-          ssn: "0000"
-        },
-        address: {
-          street1: "3515 Woodridge Lane",
-          city: "Memphis",
-          state: "TN",
-          postal_code: "38115",
-          country_code: "US"
-        },
-        name: {
-          first: "David",
-          last: "Brooks"
-        }
+      blockscore.people.create({
+        name_first: "John",
+        name_last: "Doe",
+        birth_year: '1993',
+        birth_month: '01',
+        birth_day: '13',
+        document_type: "ssn",
+        document_value: "0000",
+        address_street1: "3515 Woodridge Lane",
+        address_city: "Memphis",
+        address_subdivision: "TN",
+        address_postal_code: "38115",
+        address_country_code: "US"
       }, this.callback);
     },
-    'returns a verification': function(err, response) {
+    'returns a person': function(err, response) {
       assert.isNull(err);
       assert.isDefined(response);
       assert.isDefined(response.id);
@@ -40,31 +37,31 @@ vows.describe("Verifications API").addBatch({
       assert.isDefined(response.updated_at);
       assert.equal(response.status, 'valid');
     },
-    'retrieve a verification': {
-      topic: function(create_err, verification) {
-        blockscore.verifications.retrieve(verification.id, this.callback);
+    'retrieve a person': {
+      topic: function(create_err, person) {
+        blockscore.people.retrieve(person.id, this.callback);
       },
-      'Got a verification': function(err, response) {
+      'Got a person': function(err, response) {
         assert.isNull(err);
         assert.isDefined(response);
         assert.isDefined(response.id);
       },
     },
-    'create questions': {
-      topic: function(create_err, verification) {
-        blockscore.questions.create(verification.id, this.callback);
+    'create question set': {
+      topic: function(create_err, person) {
+        blockscore.question_sets.create(person.id, this.callback);
       },
-      'got newly created questions': function(err, response) {
+      'got newly created question set': function(err, response) {
         assert.ifError(err);
-        assert.ok(response.verification_id);
+        assert.ok(response.person_id);
         assert.ok(response.id);
         assert.ok(Array.isArray(response.questions));
         assert.ok(Array.isArray(response.questions[0].answers));
       },
-      'retrieve questions': {
+      'retrieve question set': {
         topic: function(err, create_response) {
           var self = this;
-          blockscore.questions.retrieve(create_response.id, function(err, response) {
+          blockscore.question_sets.retrieve(create_response.id, function(err, response) {
             self.callback(err, response, create_response);
           });
         },
@@ -73,10 +70,10 @@ vows.describe("Verifications API").addBatch({
           assert.deepEqual(retrieve_response, create_response);
         }
       },
-      'score questions': {
+      'score question set': {
         topic: function(err, response) {
           var data = {
-            verification_id: response.verification_id,
+            person_id: response.person_id,
             question_set_id: response.id,
             answers: [
               {
@@ -101,7 +98,7 @@ vows.describe("Verifications API").addBatch({
               }
             ]
           };
-          blockscore.questions.score(data, this.callback);
+          blockscore.question_sets.score(data, this.callback);
         },
         'Got score': function(err, response) {
           assert.ifError(err);
@@ -111,28 +108,28 @@ vows.describe("Verifications API").addBatch({
       }
     }
   },
-  'Listing verifications': {
+  'Listing people': {
     topic: [],
 
     'Listing without count or offset': {
       topic: function(arr) {
-        blockscore.verifications.list({}, this.callback);
+        blockscore.people.list({}, this.callback);
       },
       'when listed with no parameters': function(err, result) {
-        assert.instanceOf(result, Array);
+        assert.instanceOf(result.data, Array);
         assert.isNotZero(result.length);
       }
     },
     'Listing with count of 1': {
       topic: function(arr) {
-        blockscore.verifications.list({
+        blockscore.people.list({
           count: 1
         }, this.callback);
       },
       'when given count of one': function(err, result) {
         assert.isNotZero(result.length);
-        assert.isTrue(result.length === 1);
-        assert.isDefined(result[0].id);
+        assert.isTrue(result.data.length === 1);
+        assert.isDefined(result.data[0].id);
       }
     }
   }
