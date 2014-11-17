@@ -1,6 +1,6 @@
 # blockscore-node
 
-This is the official library for Node.JS clients of the BlockScore API. [Click here to read the full documentation](https://manage.blockscore.com/docs).
+This is the official library for Node.JS clients of the BlockScore API. [Click here to read the full documentation](http://docs.blockscore.com/v4.0/node/).
 
 ## Install
 
@@ -18,47 +18,44 @@ npm install blockscore
 var blockscore = require('blockscore')('your api key')
 ```
 
-## Verifications
+## People
     
-### List all verifications
+### List all people
 
 ```javascript
-blockscore.verifications.list({}, callback);
+blockscore.people.list({}, callback);
 ```
 
-### List `5` verifications
+### List `5` people
 
 ```javascript
-blockscore.verifications.list({
+blockscore.people.list({
   count: 5
 }, callback);
 ```
     
-### View a verification by ID
+### View a person by ID
 
 ```javascript
-blockscore.verifications.retrieve(verification_id, callback);
+blockscore.people.retrieve(person_id, callback);
 ```
 
-### Create a new verification
+### Create a new person
 
 ```javascript
-blockscore.verifications.create({
-	date_of_birth: '1993-08-23',
-	identification: {
-	  ssn: "0000"
-	},
-	address: {
-	  street1: "1 Infinite Loop",
-	  city: "Cupertino",
-	  state: "CA",
-	  postal_code: "95014",
-	  country_code: "US"
-	},
-	name: {
-	  first: "Alain",
-	  last: "Meier"
-	}
+blockscore.people.create({
+  name_first: "John",
+  name_last: "Doe",
+  birth_year: '1993',
+  birth_month: '01',
+  birth_day: '13',
+  document_type: "ssn",
+  document_value: "0000",
+  address_street1: "3515 Woodridge Lane",
+  address_city: "Memphis",
+  address_subdivision: "TN",
+  address_postal_code: "38115",
+  address_country_code: "US"
 }, callback);
 ```
 
@@ -67,14 +64,14 @@ blockscore.verifications.create({
 ### Create a new question set
 
 ```javascript
-blockscore.questions.create(verification_id, callback);
+blockscore.question_sets.create(person_id, callback);
 ```
 
 ### Score a question set
 
 ```javascript
 var data = {
-	verification_id: response.verification_id,
+	person_id: response.person_id,
 	question_set_id: response.id,
 	answers: [
 	  {
@@ -128,114 +125,103 @@ blockscore.companies.retrieve(company_id, callback);
 
 ```javascript
 blockscore.companies.create({
-    "entity_name": "BlockScore",
-    "tax_id": "123410000",
-    "incorp_date": "1980-08-25",
-    "incorp_state": "DE",
-    "incorp_country_code": "US",
-    "incorp_type": "corporation",
-    "dbas": "BitRemit",
-    "registration_number": "123123123",
-    "email": "test@example.com",
-    "url": "https://blockscore.com",
-    "phone_number": "6505555555",
-    "ip_address": "67.160.8.182",
-    "address": {
-      "street1": "123 Fake Streets",
-      "street2": null,
-      "city": "Stanford",
-      "state": "CA",
-      "postal_code": "94305",
-      "country_code": "US"
-    },
-    "details": {
-      "entity_name": "match",
-      "tax_id": "match",
-      "ofac": "no_match"
-    }
+  "entity_name": "BlockScore",
+  "tax_id": "123410000",
+  "incorporation_year": "1980",
+  "incorporation_month": "8",
+  "incorporation_day": "25",
+  "incorporation_state": "DE",
+  "incorporation_country_code": "US",
+  "incorporation_type": "corporation",
+  "dbas": "BitRemit",
+  "registration_number": "123123123",
+  "email": "test@example.com",
+  "url": "https://blockscore.com",
+  "phone_number": "6505555555",
+  "ip_address": "67.160.8.182",
+  "address_street1": "123 Fake Streets",
+  "address_street2": null,
+  "address_city": "Stanford",
+  "address_subdivision": "CA",
+  "address_postal_code": "94305",
+  "address_country_code": "US"
 }, callback);
 ```
 
-## Watchlist Candidates
+## Candidates
     
-### List all watchlist candidates
+### List all candidates
 
 ```javascript
-blockscore.watchlist_candidates.list({}, callback);
+blockscore.candidates.list({}, callback);
 ```
 
-### List `3` watchlist candidates
+### List `3` candidates
 
 ```javascript
-blockscore.watchlist_candidates.list({
+blockscore.candidates.list({
   count: 3
 }, callback);
 ```
     
-### View a watchlist candidate by ID
+### View a candidate by ID
 
 ```javascript
-blockscore.watchlist_candidates.retrieve(watchlist_candidate_id, callback);
+blockscore.candidates.retrieve(candidate_id, callback);
 ```
 
-### Create a new watchlist candidate
+### Create a new candidate
 
 ```javascript
-blockscore.watchlist_candidates.create({
-	date_of_birth: '1993-08-23',
-	identification: {
-	  ssn: "0000"
-	},
-	address: {
-	  street1: "1 Infinite Loop",
-	  city: "Cupertino",
-	  state: "CA",
-	  postal_code: "95014",
-	  country_code: "US"
-	},
-	name: {
-	  first: "Alain",
-	  last: "Meier"
-	}
+blockscore.candidates.create({
+  date_of_birth: '1993-01-13',
+  ssn: "0000",
+  address_street1: "3515 Woodridge Lane",
+  address_city: "Memphis",
+  address_state: "TN",
+  address_postal_code: "38115",
+  address_country_code: "US",
+  name_first: "Joe",
+  name_last: "Schmo"
 }, callback);
 ```
 
-### Update a watchlist candidate
+### Update a candidate
 
 Only the information you send us will be updated - the rest will remain the same.
 
 ```javascript
-blockscore.watchlist_candidates.update(watchlist_candidate.id, {
+blockscore.candidates.update(candidate.id, {
 	address_state:'CA', 
 }, callback);
 ```
 
-### View a watchlist candidate's past hits
+### View a candidate's past hits
 
 ```javascript
-blockscore.watchlist_candidates.hits(watchlist_candidate.id, callback);
+blockscore.candidates.hits(candidate.id, callback);
 ```
 
-### Delete a watchlist candidate from scan list
+### Delete a candidate from scan list
 
 ```javascript
-blockscore.watchlist_candidates.del(watchlist_candidate.id, callback);
+blockscore.candidates.del(candidate.id, callback);
 ```
 
-### View a watchlist candidate's revision history	
+### View a candidate's revision history	
 ```javascript
-blockscore.watchlist_candidates.history(watchlist_candidate.id, callback);
+blockscore.candidates.history(candidate.id, callback);
 ```
 
 ## Watchlists
 
 ### Search watchlists
 
-Creates a new verification, runs it through our verification process, and returns a list of all associated matches.
+Creates a new person, runs it through our verification process, and returns a list of all associated matches.
 
 ```javascript
 blockscore.watchlists.search({
-	watchlist_candidate_id: id,  // required
+	candidate_id: id,  // required
 	match_type: type  // optional
 }, callback);
 ```
