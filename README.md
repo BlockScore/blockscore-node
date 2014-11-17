@@ -96,7 +96,7 @@ var data = {
 	  }
 	]
 };
-blockscore.questions.score(data, callback);
+blockscore.question_sets.score(data, callback);
 ```
 
 ## Companies
