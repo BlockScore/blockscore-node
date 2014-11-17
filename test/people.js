@@ -73,8 +73,7 @@ vows.describe("People API").addBatch({
       'score question set': {
         topic: function(err, response) {
           var data = {
-            person_id: response.person_id,
-            question_set_id: response.id,
+            id: response.id,
             answers: [
               {
                 question_id: 1,
