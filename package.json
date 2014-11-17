@@ -11,9 +11,12 @@
     "ofac",
     "kyc",
     "know your customer",
-    "verification"
+    "verification",
+    "id verification",
+    "watchlist scanning",
+    "watchlists"
   ],
-  "version": "3.2.0",
+  "version": "4.0.0",
   "homepage": "https://github.com/blockscore/blockscore-node",
   "repository": {
     "type": "git",

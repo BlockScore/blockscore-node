@@ -18,29 +18,24 @@ vows.describe("Companies API").addBatch({
       blockscore.companies.create({
         "entity_name": "BlockScore",
         "tax_id": "123410000",
-        "incorp_date": "1980-08-25",
-        "incorp_state": "DE",
-        "incorp_country_code": "US",
-        "incorp_type": "corporation",
+        "incorporation_year": "1980",
+        "incorporation_month": "8",
+        "incorporation_day": "25",
+        "incorporation_state": "DE",
+        "incorporation_country_code": "US",
+        "incorporation_type": "corporation",
         "dbas": "BitRemit",
         "registration_number": "123123123",
         "email": "test@example.com",
         "url": "https://blockscore.com",
         "phone_number": "6505555555",
         "ip_address": "67.160.8.182",
-        "address": {
-          "street1": "123 Fake Streets",
-          "street2": null,
-          "city": "Stanford",
-          "state": "CA",
-          "postal_code": "94305",
-          "country_code": "US"
-        },
-        "details": {
-          "entity_name": "match",
-          "tax_id": "match",
-          "ofac": "no_match"
-        }
+        "address_street1": "123 Fake Streets",
+        "address_street2": null,
+        "address_city": "Stanford",
+        "address_subdivision": "CA",
+        "address_postal_code": "94305",
+        "address_country_code": "US"
       }, this.callback);
     },
     'returns a company': function(err, response) {
@@ -67,8 +62,8 @@ vows.describe("Companies API").addBatch({
         blockscore.companies.list({}, this.callback);
       },
       'when listed with no parameters': function(err, result) {
-        assert.instanceOf(result, Array);
-        assert.isNotZero(result.length);
+        assert.instanceOf(result.data, Array);
+        assert.isNotZero(result.data.length);
       }
     },
     'Listing with count of 1': {
@@ -78,9 +73,9 @@ vows.describe("Companies API").addBatch({
         }, this.callback);
       },
       'when given count of one': function(err, result) {
-        assert.isNotZero(result.length);
-        assert.isTrue(result.length === 1);
-        assert.isDefined(result[0].id);
+        assert.isNotZero(result.data.length);
+        assert.isTrue(result.data.length === 1);
+        assert.isDefined(result.data[0].id);
       }
     }
   }
