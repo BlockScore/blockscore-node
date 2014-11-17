@@ -97,15 +97,15 @@ vows.describe("Candidates API").addBatch({
         }
       }
   },  
-  'Create candidate & w/ name "Mohammed"  search watchlists for him': {
+  'Create candidate & w/ name "John Bredenkamp"  search watchlists for him': {
       topic: function() {
-        blockscore.candidates.create( {name_first: 'Mohammed'}, this.callback);
+        blockscore.candidates.create( {name_first: 'John', name_last: "Bredenkamp"}, this.callback);
       },
-      'searching on person w/ name "Mohammed" results in several matches': {
+      'searching on person w/ name "John Bredenkamp" results in several matches': {
         topic: function(create_err, candidate) {
           blockscore.watchlists.search({candidate_id: candidate.id}, this.callback);
         },
-        'Some matches result from searching person w/ name "Mohammed"': function(err, result) {
+        'Some matches result from searching person w/ name "John Bredenkamp"': function(err, result) {
           assert.isArray(result.matches);
           assert.isTrue(result.matches.length > 0);
         }
