@@ -71,8 +71,7 @@ blockscore.question_sets.create(person_id, callback);
 
 ```javascript
 var data = {
-	person_id: response.person_id,
-	question_set_id: response.id,
+	id: response.id,
 	answers: [
 	  {
 	    question_id: 1,
