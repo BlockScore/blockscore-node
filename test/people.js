@@ -54,7 +54,9 @@ vows.describe("People API").addBatch({
       },
       'without a time limit': {
         topic: function(create_err, person) {
-          blockscore.question_sets.create(person.id, this.callback);
+          blockscore.question_sets.create({
+            person_id: person.id
+          }, this.callback);
         },
         'got newly created question set': function(err, response) {
           assert.ifError(err);
