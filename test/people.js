@@ -48,61 +48,95 @@ vows.describe("People API").addBatch({
       },
     },
     'create question set': {
-      topic: function(create_err, person) {
-        blockscore.question_sets.create(person.id, this.callback);
+      topic: function(create_err, person){
+        // pass our person on to our different question set topics
+        this.callback(create_err, person);
       },
-      'got newly created question set': function(err, response) {
-        assert.ifError(err);
-        assert.ok(response.person_id);
-        assert.ok(response.id);
-        assert.ok(Array.isArray(response.questions));
-        assert.ok(Array.isArray(response.questions[0].answers));
-      },
-      'retrieve question set': {
-        topic: function(err, create_response) {
-          var self = this;
-          blockscore.question_sets.retrieve(create_response.id, function(err, response) {
-            self.callback(err, response, create_response);
-          });
+      'without a time limit': {
+        topic: function(create_err, person) {
+          blockscore.question_sets.create(person.id, this.callback);
         },
-        'check question set is same as when created': function(err, retrieve_response, create_response) {
+        'got newly created question set': function(err, response) {
           assert.ifError(err);
-          assert.deepEqual(retrieve_response, create_response);
+          assert.ok(response.person_id);
+          assert.ok(response.id);
+          assert.ok(Array.isArray(response.questions));
+          assert.ok(Array.isArray(response.questions[0].answers));
+        },
+        'retrieve question set': {
+          topic: function(err, create_response) {
+            var self = this;
+            blockscore.question_sets.retrieve(create_response.id, function(err, response) {
+              self.callback(err, response, create_response);
+            });
+          },
+          'check question set is same as when created': function(err, retrieve_response, create_response) {
+            assert.ifError(err);
+            assert.deepEqual(retrieve_response, create_response);
+          }
+        },
+        'score question set': {
+          topic: function(err, response) {
+            var data = {
+              id: response.id,
+              answers: [
+                {
+                  question_id: 1,
+                  answer_id: 1
+                },
+                {
+                  question_id: 2,
+                  answer_id: 1
+                },
+                {
+                  question_id: 3,
+                  answer_id: 1
+                },
+                {
+                  question_id: 4,
+                  answer_id: 1
+                },
+                {
+                  question_id: 5,
+                  answer_id: 1
+                }
+              ]
+            };
+            blockscore.question_sets.score(data, this.callback);
+          },
+          'Got score': function(err, response) {
+            assert.ifError(err);
+            assert.ok(response.id);
+            assert.ok(typeof response.score == 'number');
+          }
         }
       },
-      'score question set': {
-        topic: function(err, response) {
-          var data = {
-            id: response.id,
-            answers: [
-              {
-                question_id: 1,
-                answer_id: 1
-              },
-              {
-                question_id: 2,
-                answer_id: 1
-              },
-              {
-                question_id: 3,
-                answer_id: 1
-              },
-              {
-                question_id: 4,
-                answer_id: 1
-              },
-              {
-                question_id: 5,
-                answer_id: 1
-              }
-            ]
-          };
-          blockscore.question_sets.score(data, this.callback);
+      'with a time limit': {
+        topic: function(create_err, person) {
+          blockscore.question_sets.create({
+            person_id: person.id,
+            time_limit: 42
+          }, this.callback);
         },
-        'Got score': function(err, response) {
+        'got newly created question set': function(err, response) {
           assert.ifError(err);
+          assert.ok(response.person_id);
           assert.ok(response.id);
-          assert.ok(typeof response.score == 'number');
+          assert.ok(Array.isArray(response.questions));
+          assert.ok(Array.isArray(response.questions[0].answers));
+          assert.equal(response.time_limit, 42);
+        },
+        'retrieve question set': {
+          topic: function(err, create_response) {
+            var self = this;
+            blockscore.question_sets.retrieve(create_response.id, function(err, response) {
+              self.callback(err, response, create_response);
+            });
+          },
+          'check question set is same as when created': function(err, retrieve_response, create_response) {
+            assert.ifError(err);
+            assert.deepEqual(retrieve_response, create_response);
+          }
         }
       }
     }
