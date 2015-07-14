@@ -16,7 +16,7 @@
     "watchlist scanning",
     "watchlists"
   ],
-  "version": "4.0.1",
+  "version": "4.0.2",
   "homepage": "https://github.com/blockscore/blockscore-node",
   "repository": {
     "type": "git",
