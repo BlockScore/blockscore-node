@@ -47,8 +47,8 @@ vows.describe("Candidates API").addBatch({
     'update a candidate': {
       topic: function(create_err, candidate) {
         blockscore.candidates.update(candidate.id, {
-          name_first:'Tony', 
-          name_last:'Stark' 
+          name_first:'Tony',
+          name_last:'Stark'
         }, this.callback);
       },
       'Updated candidate': function(err, response) {
@@ -61,7 +61,7 @@ vows.describe("Candidates API").addBatch({
         blockscore.candidates.hits(candidate.id, this.callback);
       },
       'Got history of a candidate': function(err, result) {
-        assert.instanceOf(result, Array);
+        assert.instanceOf(result.data, Array);
       }
     },
     'delete a candidate from scan list': {
@@ -96,7 +96,7 @@ vows.describe("Candidates API").addBatch({
           assert.isTrue(result.matches.length == 0);
         }
       }
-  },  
+  },
   'Create candidate & w/ name "John Bredenkamp"  search watchlists for him': {
       topic: function() {
         blockscore.candidates.create( {name_first: 'John', name_last: "Bredenkamp"}, this.callback);
